@@ -25,6 +25,7 @@ class ProjectsController extends Controller
     {
         //
         $projects = Project::where('user_id', auth()->user()->id)
+            ->withCount('tasks')
             ->paginate();
         return new ProjectCollection($projects);
     }
@@ -50,7 +51,7 @@ class ProjectsController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $project->tasks;
         return new ProjectResource($project);
     }
 
